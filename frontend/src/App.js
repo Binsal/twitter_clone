@@ -5,17 +5,41 @@ import Home from './pages/Home';
 import Signup from './pages/Login/Signup';
 import ProtectedRoute from './pages/ProtectedRoute';
 import PageLoading from './pages/PageLoading';
+import Feed from './pages/Feed/Feed'
+import Lists from './pages/Lists/Lists';
+import Messages from "./pages/Messages/Messages";
+import More from "./pages/More/More";
+import Notifications from "./pages/Notifications/Notifications"
+import Explore from "./pages/Explore/Explore"
+import Bookmarks from "./pages/Bookmarks/Bookmarks"
+import Profile from "./pages/Profile/Profile"
 
 function App() {
   return (
     <div className="App">
      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
-        <Route path='/login'   element={<Login/>}/>
-        <Route path='/signup'   element={<Signup/>}/>
-        <Route path='/page-loading'   element={<PageLoading/>}/>
-      </Routes>
+     <Routes>
+          <Route path="/" element={<ProtectedRoute> <Home /></ProtectedRoute>} >
+            <Route index element={<Feed />} />
+          </Route>
+          <Route path="/home" element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+          >
+            <Route path="feed" element={<Feed />} />
+            <Route path="explore" element={<Explore />} />
+            <Route path="notifications" element={<Notifications />} />
+            <Route path="messages" element={<Messages />} />
+            <Route path="bookmarks" element={<Bookmarks />} />
+            <Route path="lists" element={<Lists />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="more" element={<More />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
      </BrowserRouter>
     </div>
   );
