@@ -1,11 +1,27 @@
 const express = require('express')
 const app = express()
-const port = 4000
+const port = process.env.PORT || 5000
+const cors = require('cors');
+const { ServerApiVersion } = require('mongodb');
+const { MongoClient } = require('mongodb');
+
+app.use(cors());
+app.use(express.json());
+
+const uri="mongodb+srv://twittersaloni:twsaloni@atlascluster.pc22vt4.mongodb.net/?retryWrites=true&w=marjority";
+
+
+const client = new MongoClient(uri,{useNewUrlParser:true,useUnifiedTopology:true,serverApi:ServerApiVersion.v1});
+client.connect(err=>{
+    const collection = client.db("test").collection("devices");
+    console.log("connected")
+    client.close();
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(process.env.PORT || port, () => {
+app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
