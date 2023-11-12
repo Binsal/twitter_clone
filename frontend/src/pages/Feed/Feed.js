@@ -1,12 +1,19 @@
 import React from "react";
 import "../Page.css"
+import TweetBox from "./TweetBox/TweetBox";
 
-const Feed = () =>{
+function Feed() {
+   
     return (
-        <div>
-            <h1>Feed</h1>
+        <div className="feed">
+            <div className="feed__header">
+                <h2>Home</h2>
+            </div>
+            <TweetBox />
         </div>
-    );
-};
 
-export default Feed;
+    )
+
+}
+
+export default Feed
