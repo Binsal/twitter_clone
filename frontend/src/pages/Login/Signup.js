@@ -6,6 +6,7 @@ import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth';
 import {GoogleButton} from 'react-google-button';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () =>{
     const [username,setUsername] = useState('');
@@ -41,8 +42,16 @@ const Signup = () =>{
       
     const handleSubmit = e =>{
         e.preventDefault();
-        console.log(email,password);
         createUserWithEmailAndPassword(email,password);
+
+        const user = {
+            username:username,
+            name:name,
+            email:email,
+        }
+
+        axios.post(`http://localhost:5000/register`,user)
+        
     }
 
     const handleGoogleSignIn = () =>{

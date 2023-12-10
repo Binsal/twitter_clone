@@ -19,6 +19,7 @@ import avator from "../../assests/images/avatar.png"
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CustomeLink from "./CustomeLink";
+import loggedInUser from '../../hooks/useLoggedInUser'
 
 
 const Sidebar = ({handleLogout,user}) =>{
@@ -32,6 +33,7 @@ const Sidebar = ({handleLogout,user}) =>{
     const handleClose = () =>{
         setAnchorEl(null);
     }
+    const result = user?.email?.split('@')[0];
 
     return (
         <div className="sidebar">
@@ -68,8 +70,10 @@ const Sidebar = ({handleLogout,user}) =>{
             <div className="Profile_info">
                 <Avatar src={avator}/>
                 <div className="user_info">
-                    <h4>Saloni Bindal</h4>
-                    <h5>@salonibindal</h5>
+                    <h4>
+                    {loggedInUser[0]?.name ? loggedInUser[0].name : user && user[0]?.displayName}
+                    </h4>
+                    <h5>@{result}</h5>
                 </div>
                 <IconButton 
                     size="small" 
@@ -86,8 +90,10 @@ const Sidebar = ({handleLogout,user}) =>{
                     <Avatar src={avator}/>
                     <div className="user_info  subUser_info">
                        <div>
-                       <h4>Saloni Bindal</h4>
-                        <h5>@salonibindal</h5>
+                        <h4>
+                            {loggedInUser[0]?.name ? loggedInUser[0].name : user && user[0]?.displayName}
+                        </h4>
+                            <h5>@{result}</h5>
                        </div>
                        <ListItemIcon className="done_icon">
                             <DoneIcon/>

@@ -26,12 +26,30 @@ async function run(){
       const post = await postCollection.find().toArray();
       res.send(post);
     })
+
+    app.get('/user',async (req,res)=>{
+      const user = await postCollection.find().toArray();
+      res.send(user);
+    })
+
+    app.get('/loggedInUser',async(req,res)=>{
+       const email = req.query.email;
+       const user = await userCollection.find({email:email}).toArray();
+       res.send(user);
+    })
   
     app.post('/post',async (req,res)=>{
       const post=req.body;
       const result = await postCollection.insertOne(post);
       res.send(result);
     })
+
+    app.post('/register',async (req,res)=>{
+      const user=req.body;
+      const result = await userCollection.insertOne(user);
+      res.send(result);
+    })
+
   }
 
     catch(error){
