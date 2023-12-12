@@ -37,6 +37,12 @@ async function run(){
        const user = await userCollection.find({email:email}).toArray();
        res.send(user);
     })
+
+    app.get('/userPost',async(req,res)=>{
+      const email = req.query.email;
+      const post = (await userCollection.find({email:email}).toArray()).reverse();
+      res.send(post);
+   })
   
     app.post('/post',async (req,res)=>{
       const post=req.body;
@@ -47,6 +53,15 @@ async function run(){
     app.post('/register',async (req,res)=>{
       const user=req.body;
       const result = await userCollection.insertOne(user);
+      res.send(result);
+    })
+
+    app.patch('/userUpdates/:email',async (req,res) =>{
+      const filter = req.params;
+      const profile = req.body;
+      const options = { upsert:true };
+      const updateDoc = {$set:Profile};
+      const result = await userCollection.updateOne(filter,updateDoc,options);
       res.send(result);
     })
 
