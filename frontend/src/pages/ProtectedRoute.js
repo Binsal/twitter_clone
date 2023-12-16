@@ -1,18 +1,10 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../firebase.init";
-import PageLoading from "./PageLoading";
-
+import { useUserAuth } from "../context/UserAuthContext";
 const ProtectedRoute = ({ children }) => {
-    const [ user,isLoading ] = useAuthState(auth);
+    const { user } = useUserAuth();
 
     // console.log("Check user in Private: ", user);
-
-    if(isLoading){
-        return <PageLoading/>
-    }
-
     if (!user) {
         return <Navigate to="/login" />;
     }

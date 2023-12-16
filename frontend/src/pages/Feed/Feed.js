@@ -1,8 +1,6 @@
-
-
 import React, { useEffect, useState } from "react";
 import Post from "./Post/Post";
-// import "./Feed.css";
+import "./Feed.css";
 import TweetBox from "./TweetBox/TweetBox";
 
 function Feed() {
@@ -10,7 +8,7 @@ function Feed() {
 
     useEffect(() => {
         //fetch('https://pacific-peak-30751.herokuapp.com/post')
-        fetch('http://localhost:5000/post')
+        fetch('https://twitter-backend-4e0f.onrender.com/post')
             .then(res => res.json())
             .then(data => {
                 setPosts(data);

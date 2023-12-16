@@ -1,12 +1,12 @@
-import React from "react";
-import "../Page.css";
+import React from 'react'
+import '../pages.css'
 
-const More = () =>{
-    return(
-        <div className="page">
-            <h2 className="pageTitle">Welcome to More</h2>
+function More() {
+    return (
+        <div className='page'>
+            <h2 className='pageTitle'>Welcome to More page</h2>
         </div>
-    );
-};
+    )
+}
 
-export default More;
+export default More

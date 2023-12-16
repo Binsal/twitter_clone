@@ -3,9 +3,7 @@ import "./TweetBox.css";
 import { Avatar, Button } from "@mui/material";
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import axios from "axios";
-import auth from "../../../firebase.init";
-import { useAuthState } from "react-firebase-hooks/auth";
-// import { useUserAuth } from "../../../context/UserAuthContext";
+import { useUserAuth } from "../../../context/UserAuthContext";
 import useLoggedInUser from "../../../hooks/useLoggedInUser";
 
 function TweetBox() {
@@ -15,12 +13,11 @@ function TweetBox() {
     const [name, setName] = useState('');
     const [username, setUsername] = useState(' ');
     const [loggedInUser] = useLoggedInUser();
-    // const { user } = useUserAuth();
-    const [user] = useAuthState(auth);
+    const { user } = useUserAuth();
     const email = user?.email;
 
 
-    const userProfilePic = loggedInUser[0]?.profileImage ? loggedInUser[0]?.profileImage :"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+    const userProfilePic = loggedInUser[0]?.profileImage ? loggedInUser[0]?.profileImage : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
 
     // console.log(user?.providerData[0]?.providerId);
 
@@ -31,7 +28,7 @@ function TweetBox() {
         const formData = new FormData();
         formData.set('image', image)
 
-        axios.post("https://api.imgbb.com/1/upload?key=dea790b430f3f2a780b59977707d418a", formData)
+        axios.post("https://api.imgbb.com/1/upload?key=c1e87660595242c0175f82bb850d3e15", formData)
             .then(res => {
                 setImageURL(res.data.data.display_url);
                 // console.log(res.data.data.display_url);
@@ -46,7 +43,7 @@ function TweetBox() {
         e.preventDefault();
 
         if (user?.providerData[0]?.providerId === 'password') {
-            fetch(`http://localhost:5000/loggedInUser?email=${email}`)
+            fetch(`https://twitter-backend-4e0f.onrender.com/loggedInUser?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setName(data[0]?.name)
@@ -70,7 +67,7 @@ function TweetBox() {
             console.log(userPost);
             setPost('')
             setImageURL('')
-            fetch('http://localhost:5000/post', {
+            fetch('https://twitter-backend-4e0f.onrender.com/post', {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
